@@ -11,3 +11,17 @@
 *.lai
 *.la
 *.a
+
+# Autotools
+autom4te.cache/
+Makefile.in
+aclocal.m4
+configure
+include/config.h.in
+install-sh
+missing
+Makefile
+config.log
+config.status
+include/config.h
+include/stamp-h1
