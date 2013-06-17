@@ -35,6 +35,13 @@ namespace Attest {
             ~Test() {
                 std::cerr << "Destroyed test: " << name_ << std::endl;
             }
+            /**
+             * Get the name of the test
+             * @return the name of the test
+             */
+            const char* name() const {
+                return name_.c_str();
+            }
         private:
         /** The name of the test */
         std::string name_;
@@ -66,5 +73,9 @@ namespace Attest {
      * @param callback The callback to execute, which is called with the index and name of the test
      */
     void for_each_test(std::function<void(std::size_t, const char*)> callback) {
+        size_t index = 0;
+        for (auto iter = tests.begin(); iter != tests.end(); ++iter, ++index) {
+            callback(index, (*iter)->name());
+        }
     }
 }

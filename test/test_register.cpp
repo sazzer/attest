@@ -16,6 +16,33 @@
  * =====================================================================================
  */
 
+#include "attest/attest.h"
+#include "attest/attest_runner.h"
+#include <cstring>
+#include "test_harness.h"
+
+/**
+ * Test registering a simple function and ensuring that it is actually listed
+ */
+void test_register_simple() {
+    int highestIndex = -1;
+    Attest::Attest_register("Simple", [](){});
+    Attest::for_each_test([&](int index, const char* name){
+        std::cout << "Seen test " << index << " called " << name << std::endl;
+        if (index > 0) {
+            throw "More tests than expected were returned!";
+        }
+        if (index == 0 && strcmp("Simple", name) != 0) {
+            throw "Test 0 had the wrong name";
+        }
+        highestIndex = std::max(highestIndex, index);
+    });
+    if (highestIndex != 0) {
+        throw "Highest Index wasn't what was expected";
+    }
+}
+
 int main(void) {
+    run("test_register_simple", test_register_simple);
     return 0;
 }
