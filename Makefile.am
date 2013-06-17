@@ -9,4 +9,8 @@ check_PROGRAMS = test_register
 test_register_SOURCES = test/test_register.cpp
 test_register_LDADD = libattest.la
 
-TESTS = test_register
+check_PROGRAMS += test_auto_register
+test_auto_register_SOURCES = test/test_auto_register.cpp
+test_auto_register_LDADD = libattest.la
+
+TESTS = test_register test_auto_register

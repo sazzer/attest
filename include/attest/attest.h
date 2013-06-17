@@ -37,7 +37,7 @@ namespace Attest {
 #define CONCATENATE_DETAIL(x, y) x##y
 #define CONCATENATE(x, y) CONCATENATE_DETAIL(x, y)
 #define MAKE_TEST_NAME CONCATENATE(test, __COUNTER__)
-#define ATTEST_DETAIL(var, name, function) static const bool var = Attest_register(name, function);
+#define ATTEST_DETAIL(var, name, function) static const bool var = Attest::Attest_register(name, function);
 #define ATTEST(name, function) ATTEST_DETAIL(MAKE_TEST_NAME, name, function)
 
 #endif   /* ----- #ifndef ATTEST_INC  ----- */
