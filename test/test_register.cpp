@@ -26,6 +26,7 @@
  */
 void test_register_simple() {
     int highestIndex = -1;
+    Attest::clear_tests();
     Attest::Attest_register("Simple", [](){});
     Attest::for_each_test([&](int index, const char* name){
         std::cout << "Seen test " << index << " called " << name << std::endl;
@@ -44,5 +45,5 @@ void test_register_simple() {
 
 int main(void) {
     run("test_register_simple", test_register_simple);
-    return 0;
+    return test_result ? 0 : 1;
 }

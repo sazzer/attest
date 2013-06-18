@@ -42,6 +42,12 @@ namespace Attest {
             const char* name() const {
                 return name_.c_str();
             }
+            /**
+             * Actually run the test
+             */
+            void run() const {
+                test_();
+            }
         private:
         /** The name of the test */
         std::string name_;
@@ -76,6 +82,46 @@ namespace Attest {
         size_t index = 0;
         for (auto iter = tests.begin(); iter != tests.end(); ++iter, ++index) {
             callback(index, (*iter)->name());
+        }
+    }
+
+    /**
+     * Helper to clear the registered tests. This is only useful for testing purposes
+     */
+    void clear_tests() {
+        tests.clear();
+    }
+
+    /**
+     * Actually run all of the registered tests, and call the provided callback function with the results of each test run
+     */
+    void run_tests(std::function<void(const TestResult&)> callback) {
+        size_t index = 0;
+        for (auto iter = tests.begin(); iter != tests.end(); ++iter, ++index) {
+            TestResult testResult = {
+                (*iter)->name(),
+                index,
+                "",
+                ""
+            };
+
+            try {
+                (*iter)->run();
+            }
+            catch (const char* e) {
+                testResult.error = e;
+            }
+            catch (const std::string& e) {
+                testResult.error = e;
+            }
+            catch (const std::exception& e) {
+                testResult.error = e.what();
+            }
+            catch (...) {
+                testResult.error = "An unknown error occurred";
+            }
+
+            callback(testResult);
         }
     }
 }

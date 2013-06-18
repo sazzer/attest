@@ -23,6 +23,9 @@
 #include <iostream>
 #include <sstream>
 
+/** The test result to return */
+static bool test_result = true;
+
 /**
  * Actually run a test
  * @param name The name of the test to run
@@ -61,7 +64,7 @@ void run(const char* name, std::function<void(void)> test) {
     }
 
     if (error) {
-        exit(1);
+        test_result = false;
     }
 }
 
