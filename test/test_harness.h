@@ -20,6 +20,7 @@
 #ifndef  TEST_HARNESS_INC
 #define  TEST_HARNESS_INC
 
+#include <functional>
 #include <iostream>
 #include <sstream>
 

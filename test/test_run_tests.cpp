@@ -62,66 +62,36 @@ void run_test(const char* name, const char* output, const char* error, const std
     }
 }
 
-/**
- * Test running of a test case works correctly
- */
-void test_run_success() {
-    run_test("Simple", "", 0, [](){});
-}
-
-/**
- * Test that running a test case that throws a string returns the correct error
- */
-void test_run_throws_string() {
-    run_test("ThrowsString", "", "This is a string", [](){
-        throw "This is a string";
-    });
-}
-
-/**
- * Test that running a test case that throws a string returns the correct error
- */
-void test_run_throws_exception() {
-    run_test("ThrowsException", "", "This is a string", [](){
-        throw std::runtime_error("This is a string");
-    });
-}
-
-/**
- * Test that standard output is captured correctly
- */
-void test_stdout() {
-    run_test("Stdout", "Output", 0, [](){
-        std::cout << "Output";
-    });
-}
-
-/**
- * Test that standard output is captured correctly
- */
-void test_stderr() {
-    run_test("Stderr", "Errput", 0, [](){
-        std::cerr << "Errput";
-    });
-}
-
-/**
- * Test that standard output is captured correctly
- */
-void test_stdout_and_stderr() {
-    run_test("StdoutStderr", "OutputErrput", 0, [](){
-        std::cout << "Output";
-        std::cerr << "Errput";
-    });
-}
-
 int main(void) {
-    run("test_run_success", test_run_success);
-    run("test_run_throws_string", test_run_throws_string);
-    run("test_run_throws_exception", test_run_throws_exception);
-    run("test_stdout", test_stdout);
-    run("test_stderr", test_stderr);
-    run("test_stdout_and_stderr", test_stdout_and_stderr);
+    run("test_run_success", [](){
+        run_test("Simple", "", 0, [](){});
+    });
+    run("test_run_throws_string", [](){
+        run_test("ThrowsString", "", "This is a string", [](){
+            throw "This is a string";
+        });
+    });
+    run("test_run_throws_exception", [](){
+        run_test("ThrowsException", "", "This is a string", [](){
+            throw std::runtime_error("This is a string");
+        });
+    });
+    run("test_stdout", [](){
+        run_test("Stdout", "Output", 0, [](){
+            std::cout << "Output";
+        });
+    });
+    run("test_stderr", [](){
+        run_test("Stderr", "Errput", 0, [](){
+            std::cerr << "Errput";
+        });
+    });
+    run("test_stdout_and_stderr", [](){
+        run_test("StdoutStderr", "OutputErrput", 0, [](){
+            std::cout << "Output";
+            std::cerr << "Errput";
+        });
+    });
     return test_result ? 0 : 1;
 }
 
