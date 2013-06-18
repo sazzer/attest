@@ -22,6 +22,7 @@
 #include <string>
 #include <memory>
 #include <iostream>
+#include <sstream>
 
 namespace Attest {
     /**
@@ -105,6 +106,9 @@ namespace Attest {
                 ""
             };
 
+            std::stringstream buffer;
+            std::streambuf* oldout = std::cout.rdbuf(buffer.rdbuf());
+            std::streambuf* olderr = std::cerr.rdbuf(buffer.rdbuf());
             try {
                 (*iter)->run();
             }
@@ -120,6 +124,9 @@ namespace Attest {
             catch (...) {
                 testResult.error = "An unknown error occurred";
             }
+            std::cout.rdbuf(oldout);
+            std::cerr.rdbuf(olderr);
+            testResult.output = buffer.str();
 
             callback(testResult);
         }
