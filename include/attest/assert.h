@@ -51,6 +51,58 @@ namespace Attest {
         };
 
         /**
+         * Outright fail, without any tests involved
+         * @param message The optional message to use
+         */
+        void fail(const char* message = 0) {
+            std::string msg;
+            if (message == 0) {
+                msg = "Assertion error: Failed";
+            } else {
+                msg = message;
+            }
+            throw AssertionException(msg);
+        }
+
+        /**
+         * Assert that a boolean value is True
+         * @param actual The actual value
+         * @param message The optional message to use if the value is false.
+         */
+        void is_true(const bool actual, const char* message = 0) {
+            std::string msg;
+            if (message == 0) {
+                std::stringstream msgstream;
+                msgstream << "Assertion error: Expected 'true' but got '" << actual << "'";
+                msg = msgstream.str();
+            } else {
+                msg = message;
+            }
+            if (!actual) {
+                fail(msg.c_str());
+            }
+        }
+
+        /**
+         * Assert that a boolean value is False
+         * @param actual The actual value
+         * @param message The optional message to use if the value is true
+         */
+        void is_false(const bool actual, const char* message = 0) {
+            std::string msg;
+            if (message == 0) {
+                std::stringstream msgstream;
+                msgstream << "Assertion error: Expected 'false' but got '" << actual << "'";
+                msg = msgstream.str();
+            } else {
+                msg = message;
+            }
+            if (actual) {
+                fail(msg.c_str());
+            }
+        }
+
+        /**
          * Assert that two values are equal to each other
          * @param expected The expected value
          * @param actual The actual value
@@ -66,9 +118,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected == actual)) {
-                throw AssertionException(msg);
-            }
+            is_true(expected == actual, msg.c_str());
         }
 
         /**
@@ -87,9 +137,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected != actual)) {
-                throw AssertionException(msg);
-            }
+            is_true(expected != actual, msg.c_str());
         }
 
         /**
@@ -108,9 +156,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected < actual)) {
-                throw AssertionException(msg);
-            }
+            is_true(expected < actual, msg.c_str());
         }
 
         /**
@@ -129,9 +175,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected <= actual)) {
-                throw AssertionException(msg);
-            }
+            is_true(expected <= actual, msg.c_str());
         }
 
         /**
@@ -150,9 +194,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected > actual)) {
-                throw AssertionException(msg);
-            }
+            is_true(expected > actual, msg.c_str());
         }
 
         /**
@@ -171,41 +213,7 @@ namespace Attest {
             } else {
                 msg = message;
             }
-            if (!(expected >= actual)) {
-                throw AssertionException(msg);
-            }
-        }
-
-        /**
-         * Assert that a boolean value is True
-         * @param actual The actual value
-         * @param message The optional message to use if the value is false.
-         */
-        void is_true(const bool actual, const char* message = 0) {
-            equals(true, actual, message);
-        }
-
-        /**
-         * Assert that a boolean value is False
-         * @param actual The actual value
-         * @param message The optional message to use if the value is true
-         */
-        void is_false(const bool actual, const char* message = 0) {
-            equals(false, actual, message);
-        }
-
-        /**
-         * Outright fail, without any tests involved
-         * @param message The optional message to use
-         */
-        void fail(const char* message = 0) {
-            std::string msg;
-            if (message == 0) {
-                msg = "Assertion error: Failed";
-            } else {
-                msg = message;
-            }
-            throw AssertionException(msg);
+            is_true(expected >= actual, msg.c_str());
         }
     }
 }
