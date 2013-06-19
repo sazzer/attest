@@ -100,6 +100,33 @@ int main(void) {
             Attest::Assert::greater_than_or_equal(1, 2);
         });
     });
+
+    run("test_assert_true", [](){
+        Attest::Assert::is_true(true);
+        Attest::Assert::is_true(1 == 1);
+
+        testAssertion([](){
+            Attest::Assert::is_true(false);
+        });
+    });
+
+    run("test_assert_false", [](){
+        Attest::Assert::is_false(false);
+        Attest::Assert::is_false(1 == 2);
+
+        testAssertion([](){
+            Attest::Assert::is_false(true);
+        });
+    });
+
+    run("test_assert_fail", [](){
+        testAssertion([](){
+            Attest::Assert::fail();
+        });
+        testAssertion([](){
+            Attest::Assert::fail("I failed");
+        });
+    });
     return test_result ? 0 : 1;
 }
 

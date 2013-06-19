@@ -19,6 +19,7 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
+#include <functional>
 
 #ifndef  ASSERT_INC
 #define  ASSERT_INC
@@ -173,6 +174,38 @@ namespace Attest {
             if (!(expected >= actual)) {
                 throw AssertionException(msg);
             }
+        }
+
+        /**
+         * Assert that a boolean value is True
+         * @param actual The actual value
+         * @param message The optional message to use if the value is false.
+         */
+        void is_true(const bool actual, const char* message = 0) {
+            equals(true, actual, message);
+        }
+
+        /**
+         * Assert that a boolean value is False
+         * @param actual The actual value
+         * @param message The optional message to use if the value is true
+         */
+        void is_false(const bool actual, const char* message = 0) {
+            equals(false, actual, message);
+        }
+
+        /**
+         * Outright fail, without any tests involved
+         * @param message The optional message to use
+         */
+        void fail(const char* message = 0) {
+            std::string msg;
+            if (message == 0) {
+                msg = "Assertion error: Failed";
+            } else {
+                msg = message;
+            }
+            throw AssertionException(msg);
         }
     }
 }
