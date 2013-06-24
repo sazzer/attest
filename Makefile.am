@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS=-I m4
 
 AM_CXXFLAGS=-std=c++11 -Wall -Werror
 lib_LTLIBRARIES = libattest.la
-libattest_la_SOURCES = src/main.cpp src/attest.cpp
+libattest_la_SOURCES = src/main.cpp src/attest.cpp src/runner.cpp
 libattest_la_CPPFLAGS = ${BOOST_CPPFLAGS}
 libattest_la_LIBS = ${BOOST_LIBS}
 
@@ -24,4 +24,8 @@ check_PROGRAMS += test_assertions
 test_assertions_SOURCES = test/test_assertions.cpp
 test_assertions_LDADD = libattest.la
 
-TESTS = test_register test_auto_register test_run_tests test_assertions
+check_PROGRAMS += test_runner
+test_runner_SOURCES = test/test_runner.cpp
+test_runner_LDADD = libattest.la
+
+TESTS = test_register test_auto_register test_run_tests test_assertions test_runner
