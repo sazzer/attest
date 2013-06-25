@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test_runner.cpp
+ *       Filename:  test_reporter.cpp
  *
  *    Description:  Unit tests for the core Runner class
  *
@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 
-#include "attest/runner.h"
+#include "attest/reporter.h"
 #include "test_harness.h"
 #include <iostream>
 #include <typeinfo>
@@ -39,32 +39,32 @@ class RunnerImpl : public Attest::Runner {
 int main(void) {
     run("test_register_unique_name", [](){
         Attest::clearRunners();
-        if (!Attest::registerRunner("runner", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
+        if (!Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
             throw "Registration failed";
         }
     });
     run("test_register_non-unique_name", [](){
         Attest::clearRunners();
-        Attest::registerRunner("runner", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
+        Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
 
-        if (Attest::registerRunner("runner", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
+        if (Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
             throw "Registration should have failed";
         }
     });
-    run("test_create_unknown_runner", [](){
-        auto runner = Attest::buildRunner("unknown");
-        if (runner) {
+    run("test_create_unknown_reporter", [](){
+        auto reporter = Attest::buildRunner("unknown");
+        if (reporter) {
             throw "Somehow we constructed something!";
         }
     });
-    run("test_create_runner", [](){
-        Attest::registerRunner("runner", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
-        auto runner = Attest::buildRunner("runner");
-        if (!runner) {
+    run("test_create_reporter", [](){
+        Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
+        auto reporter = Attest::buildRunner("reporter");
+        if (!reporter) {
             throw "Somehow we constructed something!";
         }
-        if (typeid(*runner) != typeid(RunnerImpl)) {
-            std::cerr << "Got " << typeid(*runner).name() << " but wanted " << typeid(RunnerImpl).name() << std::endl;
+        if (typeid(*reporter) != typeid(RunnerImpl)) {
+            std::cerr << "Got " << typeid(*reporter).name() << " but wanted " << typeid(RunnerImpl).name() << std::endl;
             throw "Wrong type returned";
         }
     });

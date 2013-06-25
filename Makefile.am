@@ -2,9 +2,9 @@ ACLOCAL_AMFLAGS=-I m4
 
 AM_CXXFLAGS=-std=c++11 -Wall -Werror
 lib_LTLIBRARIES = libattest.la
-libattest_la_SOURCES = src/main.cpp src/attest.cpp src/runner.cpp
+libattest_la_SOURCES = src/main.cpp src/attest.cpp src/reporter.cpp src/standard_reporter.cpp
 libattest_la_CPPFLAGS = ${BOOST_CPPFLAGS}
-libattest_la_LIBS = ${BOOST_LIBS}
+libattest_la_LIBADD = ${BOOST_PROGRAM_OPTIONS_LIBS}
 
 pkginclude_HEADERS = include/attest/attest.h include/attest/assert.h
 
@@ -24,8 +24,12 @@ check_PROGRAMS += test_assertions
 test_assertions_SOURCES = test/test_assertions.cpp
 test_assertions_LDADD = libattest.la
 
-check_PROGRAMS += test_runner
-test_runner_SOURCES = test/test_runner.cpp
-test_runner_LDADD = libattest.la
+check_PROGRAMS += test_reporter
+test_reporter_SOURCES = test/test_reporter.cpp
+test_reporter_LDADD = libattest.la
 
-TESTS = test_register test_auto_register test_run_tests test_assertions test_runner
+check_PROGRAMS += test_standard_reporter
+test_standard_reporter_SOURCES = test/test_standard_reporter.cpp
+test_standard_reporter_LDADD = libattest.la ${BOOST_PROGRAM_OPTIONS_LIBS}
+
+TESTS = test_register test_auto_register test_run_tests test_assertions test_reporter test_standard_reporter
