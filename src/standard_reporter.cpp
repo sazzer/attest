@@ -39,6 +39,14 @@ namespace Attest {
             }
         }
 
+        /**
+         * Determine the current output file that is stored
+         * @return the name of the output file
+         */
+        const std::string& StandardRunner::outputFile() const {
+            return outputFile_;
+        }
+
         const static bool registered = ::Attest::registerRunner("standard", [](){
             return std::unique_ptr<Attest::Runner>(new StandardRunner);
         });

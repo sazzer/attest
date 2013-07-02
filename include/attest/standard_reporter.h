@@ -47,6 +47,11 @@ namespace Attest {
                  */
                 virtual void processOptions(const boost::program_options::variables_map& options);
 
+                /**
+                 * Determine the current output file that is stored
+                 * @return the name of the output file
+                 */
+                const std::string& outputFile() const;
             private:
                 /** The filename to write to. Might not be specified */
                 std::string outputFile_;
