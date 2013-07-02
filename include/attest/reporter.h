@@ -23,6 +23,7 @@
 #include <memory>
 #include <functional>
 #include <string>
+#include "attest/attest_runner.h"
 
 namespace Attest {
     /**
@@ -47,6 +48,22 @@ namespace Attest {
              * @param options The options to use to configure the reporter
              */
             virtual void processOptions(const boost::program_options::variables_map& options) {
+            }
+            /**
+             * Start recording of test output.
+             */
+            virtual void start() {
+            }
+            /**
+             * Record a single test output.
+             * @param result The result to record
+             */
+            virtual void record(const ::Attest::TestResult& result) {
+            }
+            /**
+             * Finish recording all of the tests
+             */
+            virtual void end() {
             }
     };
 
