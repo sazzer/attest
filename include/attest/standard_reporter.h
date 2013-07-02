@@ -22,6 +22,7 @@
 
 #include "attest/reporter.h"
 #include <string>
+#include <list>
 
 namespace Attest {
     namespace Runners {
@@ -52,9 +53,24 @@ namespace Attest {
                  * @return the name of the output file
                  */
                 const std::string& outputFile() const;
+                /**
+                 * Start recording of test output.
+                 */
+                virtual void start();
+                /**
+                 * Record a single test output.
+                 * @param result The result to record
+                 */
+                virtual void record(const ::Attest::TestResult& result);
+                /**
+                 * Finish recording all of the tests
+                 */
+                virtual void end();
             private:
                 /** The filename to write to. Might not be specified */
                 std::string outputFile_;
+                /** The list of results that we've seen */
+                std::list<Attest::TestResult> results_;
         };
     }
 }

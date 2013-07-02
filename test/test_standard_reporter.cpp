@@ -46,6 +46,11 @@ int main(void) {
         }
     });
 
+    run("no_tests", [](){
+        Attest::Runners::StandardRunner reporter;
+        reporter.start();
+        reporter.end();
+    });
     return test_result ? 0 : 1;
 }
 

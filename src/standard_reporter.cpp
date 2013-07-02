@@ -47,6 +47,45 @@ namespace Attest {
             return outputFile_;
         }
 
+        /**
+         * Start recording of test output.
+         */
+        void StandardRunner::start() {
+            results_.clear();
+        }
+
+        /**
+         * Record a single test output.
+         * @param result The result to record
+         */
+        void StandardRunner::record(const ::Attest::TestResult& result) {
+            results_.push_back(result);
+        }
+
+        /**
+         * Finish recording all of the tests
+         */
+        void StandardRunner::end() {
+            std::ostream& output = std::cout;
+            size_t tests = 0;
+            size_t passed = 0;
+            size_t failed = 0;
+            for (auto iter = results_.begin(); iter != results_.end(); ++iter, ++tests) {
+                output << iter->name << ": ";
+                if (iter->success()) {
+                    ++passed;
+                    output << "SUCCESS";
+                }
+                else {
+                    ++failed;
+                    output << "FAILURE";
+                }
+                output << std::endl;
+            }
+            output << "Tests: " << tests << ", Passed: " << passed << ", Failed: " << failed << std::endl;
+        }
+
+
         const static bool registered = ::Attest::registerRunner("standard", [](){
             return std::unique_ptr<Attest::Runner>(new StandardRunner);
         });
