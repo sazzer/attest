@@ -21,15 +21,15 @@
 
 namespace Attest {
     /** The map of reporters that can be used */
-    static std::map<std::string, std::function<std::unique_ptr<Runner>()> > reporters;
+    static std::map<std::string, std::function<std::unique_ptr<Reporter>()> > reporters;
 
     /**
-     * Register a new construction function for a new Runner of some kind
+     * Register a new construction function for a new Reporter of some kind
      * @param name The name of the reporter
      * @param constructor The function to construct the reporter
      * @return True if the reporter was registered successfully. False if not
      */
-    bool registerRunner(const std::string& name, std::function<std::unique_ptr<Runner>()> constructor) {
+    bool registerReporter(const std::string& name, std::function<std::unique_ptr<Reporter>()> constructor) {
         bool result = false;
         if (reporters.count(name) == 0) {
             reporters[name] = constructor;
@@ -43,8 +43,8 @@ namespace Attest {
      * @param name The name of the reporter to build
      * @return the built reporter
      */
-    std::unique_ptr<Runner> buildRunner(const std::string& name) {
-        std::unique_ptr<Runner> result;
+    std::unique_ptr<Reporter> buildReporter(const std::string& name) {
+        std::unique_ptr<Reporter> result;
         if (reporters.count(name) == 1) {
             result = reporters[name]();
         }
@@ -54,7 +54,7 @@ namespace Attest {
     /**
      * Helper to clear the registered reporters. Used for unit tests
      */
-    void clearRunners() {
+    void clearReporters() {
         reporters.clear();
     }
 }

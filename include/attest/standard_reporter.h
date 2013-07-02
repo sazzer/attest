@@ -25,16 +25,16 @@
 #include <list>
 
 namespace Attest {
-    namespace Runners {
+    namespace Reporters {
         /**
          * Class to represent a reporter to use to run the test and produce output
          */
-        class StandardRunner : public ::Attest::Runner {
+        class StandardReporter : public ::Attest::Reporter {
             public:
                 /**
                  * Virtual destructor
                  */
-                virtual ~StandardRunner() {
+                virtual ~StandardReporter() {
                 }
                 /**
                  * Configure the options that are supported by this reporter

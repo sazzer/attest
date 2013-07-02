@@ -29,12 +29,12 @@ namespace Attest {
     /**
      * Class to represent a reporter to use to run the test and produce output
      */
-    class Runner {
+    class Reporter {
         public:
             /**
              * Virtual destructor
              */
-            virtual ~Runner() {
+            virtual ~Reporter() {
             }
             /**
              * Configure the options that are supported by this reporter
@@ -68,23 +68,23 @@ namespace Attest {
     };
 
     /**
-     * Register a new construction function for a new Runner of some kind
+     * Register a new construction function for a new Reporter of some kind
      * @param name The name of the reporter
      * @param constructor The function to construct the reporter
      * @return True if the reporter was registered successfully. False if not
      */
-    bool registerRunner(const std::string& name, std::function<std::unique_ptr<Runner>()> constructor);
+    bool registerReporter(const std::string& name, std::function<std::unique_ptr<Reporter>()> constructor);
 
     /**
      * Build a reporter with the given name
      * @param name The name of the reporter to build
      * @return the built reporter
      */
-    std::unique_ptr<Runner> buildRunner(const std::string& name);
+    std::unique_ptr<Reporter> buildReporter(const std::string& name);
 
     /**
      * Helper to clear the registered reporters. Used for unit tests
      */
-    void clearRunners();
+    void clearReporters();
 }
 #endif   /* ----- #ifndef RUNNER_INC  ----- */

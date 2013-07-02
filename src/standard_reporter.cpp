@@ -19,12 +19,12 @@
 #include "attest/standard_reporter.h"
 
 namespace Attest {
-    namespace Runners {
+    namespace Reporters {
         /**
          * Configure the options that are supported by this reporter
          * @param options The options object to configure
          */
-        void StandardRunner::configureOptions(boost::program_options::options_description& options) {
+        void StandardReporter::configureOptions(boost::program_options::options_description& options) {
             options.add_options()
                 ("output", boost::program_options::value<std::string>(), "Write output to the specified file");
         }
@@ -33,7 +33,7 @@ namespace Attest {
          * Configure the reporter based on the variables provided by the supplied variables map
          * @param options The options to use to configure the reporter
          */
-        void StandardRunner::processOptions(const boost::program_options::variables_map& options) {
+        void StandardReporter::processOptions(const boost::program_options::variables_map& options) {
             if (options.count("output")) {
                 outputFile_ = options["output"].as<std::string>();
             }
@@ -43,14 +43,14 @@ namespace Attest {
          * Determine the current output file that is stored
          * @return the name of the output file
          */
-        const std::string& StandardRunner::outputFile() const {
+        const std::string& StandardReporter::outputFile() const {
             return outputFile_;
         }
 
         /**
          * Start recording of test output.
          */
-        void StandardRunner::start() {
+        void StandardReporter::start() {
             results_.clear();
         }
 
@@ -58,14 +58,14 @@ namespace Attest {
          * Record a single test output.
          * @param result The result to record
          */
-        void StandardRunner::record(const ::Attest::TestResult& result) {
+        void StandardReporter::record(const ::Attest::TestResult& result) {
             results_.push_back(result);
         }
 
         /**
          * Finish recording all of the tests
          */
-        void StandardRunner::end() {
+        void StandardReporter::end() {
             std::ostream& output = std::cout;
             size_t tests = 0;
             size_t passed = 0;
@@ -86,8 +86,8 @@ namespace Attest {
         }
 
 
-        const static bool registered = ::Attest::registerRunner("standard", [](){
-            return std::unique_ptr<Attest::Runner>(new StandardRunner);
+        const static bool registered = ::Attest::registerReporter("standard", [](){
+            return std::unique_ptr<Attest::Reporter>(new StandardReporter);
         });
     }
 }

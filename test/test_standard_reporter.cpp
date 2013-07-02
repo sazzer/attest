@@ -23,14 +23,14 @@
 
 int main(void) {
     run("test_options", [](){
-        Attest::Runners::StandardRunner reporter;
+        Attest::Reporters::StandardReporter reporter;
         boost::program_options::options_description desc("Allowed options");
         reporter.configureOptions(desc);
         std::cout << desc << std::endl;
     });
 
     run("test_store_options", [](){
-        Attest::Runners::StandardRunner reporter;
+        Attest::Reporters::StandardReporter reporter;
         boost::program_options::options_description desc("Allowed options");
         reporter.configureOptions(desc);
         
@@ -47,7 +47,7 @@ int main(void) {
     });
 
     run("no_tests", [](){
-        Attest::Runners::StandardRunner reporter;
+        Attest::Reporters::StandardReporter reporter;
         reporter.start();
         reporter.end();
     });

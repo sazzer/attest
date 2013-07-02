@@ -3,7 +3,7 @@
  *
  *       Filename:  test_reporter.cpp
  *
- *    Description:  Unit tests for the core Runner class
+ *    Description:  Unit tests for the core Reporter class
  *
  *        Version:  1.0
  *        Created:  24/06/13 12:42:07
@@ -21,13 +21,13 @@
 #include <iostream>
 #include <typeinfo>
 
-class RunnerImpl : public Attest::Runner {
+class ReporterImpl : public Attest::Reporter {
     public:
-        RunnerImpl() {
-            std::cout << "Creating RunnerImpl" << std::endl;
+        ReporterImpl() {
+            std::cout << "Creating ReporterImpl" << std::endl;
         }
-        virtual ~RunnerImpl() {
-            std::cout << "Killing RunnerImpl" << std::endl;
+        virtual ~ReporterImpl() {
+            std::cout << "Killing ReporterImpl" << std::endl;
         }
 
         virtual void configureOptions(boost::program_options::options_description& options) {
@@ -38,33 +38,33 @@ class RunnerImpl : public Attest::Runner {
 
 int main(void) {
     run("test_register_unique_name", [](){
-        Attest::clearRunners();
-        if (!Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
+        Attest::clearReporters();
+        if (!Attest::registerReporter("reporter", [](){return std::unique_ptr<Attest::Reporter>(new ReporterImpl);})) {
             throw "Registration failed";
         }
     });
     run("test_register_non-unique_name", [](){
-        Attest::clearRunners();
-        Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
+        Attest::clearReporters();
+        Attest::registerReporter("reporter", [](){return std::unique_ptr<Attest::Reporter>(new ReporterImpl);});
 
-        if (Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);})) {
+        if (Attest::registerReporter("reporter", [](){return std::unique_ptr<Attest::Reporter>(new ReporterImpl);})) {
             throw "Registration should have failed";
         }
     });
     run("test_create_unknown_reporter", [](){
-        auto reporter = Attest::buildRunner("unknown");
+        auto reporter = Attest::buildReporter("unknown");
         if (reporter) {
             throw "Somehow we constructed something!";
         }
     });
     run("test_create_reporter", [](){
-        Attest::registerRunner("reporter", [](){return std::unique_ptr<Attest::Runner>(new RunnerImpl);});
-        auto reporter = Attest::buildRunner("reporter");
+        Attest::registerReporter("reporter", [](){return std::unique_ptr<Attest::Reporter>(new ReporterImpl);});
+        auto reporter = Attest::buildReporter("reporter");
         if (!reporter) {
             throw "Somehow we constructed something!";
         }
-        if (typeid(*reporter) != typeid(RunnerImpl)) {
-            std::cerr << "Got " << typeid(*reporter).name() << " but wanted " << typeid(RunnerImpl).name() << std::endl;
+        if (typeid(*reporter) != typeid(ReporterImpl)) {
+            std::cerr << "Got " << typeid(*reporter).name() << " but wanted " << typeid(ReporterImpl).name() << std::endl;
             throw "Wrong type returned";
         }
     });
