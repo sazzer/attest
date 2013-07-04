@@ -32,4 +32,8 @@ check_PROGRAMS += test_standard_reporter
 test_standard_reporter_SOURCES = test/test_standard_reporter.cpp
 test_standard_reporter_LDADD = libattest.la ${BOOST_PROGRAM_OPTIONS_LIBS}
 
-TESTS = test_register test_auto_register test_run_tests test_assertions test_reporter test_standard_reporter
+check_PROGRAMS += test_real
+test_real_SOURCES = test/real_test.cpp
+test_real_LDADD = libattest.la ${BOOST_PROGRAM_OPTIONS_LIBS}
+
+TESTS = test_register test_auto_register test_run_tests test_assertions test_reporter test_standard_reporter test_real

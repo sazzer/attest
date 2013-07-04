@@ -31,10 +31,8 @@ namespace Attest {
     class Test {
         public:
             Test(const char* name, std::function<void(void)> testfunc) : name_(name), test_(testfunc) {
-                std::cerr << "Registered test: " << name << std::endl;
             }
             ~Test() {
-                std::cerr << "Destroyed test: " << name_ << std::endl;
             }
             /**
              * Get the name of the test
