@@ -61,8 +61,9 @@ namespace Attest {
 
     /**
      * Actually run all of the registered tests, and call the provided callback function with the results of each test run
+     * @return True if the tests all passed. False if any failed
      */
-    void run_tests(std::function<void(const TestResult&)> callback);
+    bool run_tests(std::function<void(const TestResult&)> callback);
 }
 
 #endif   /* ----- #ifndef ATTEST_RUNNER_INC  ----- */

@@ -26,7 +26,7 @@ void run_test(const char* name, const char* output, const char* error, const std
     Attest::clear_tests();
     Attest::Attest_register(name, testcase);
     bool seenIt = false;
-    Attest::run_tests([&](const Attest::TestResult& result){
+    bool result = Attest::run_tests([&](const Attest::TestResult& result){
         seenIt = true;
         if (result.index != 0) {
             throw "Unexpected index seen";
@@ -59,6 +59,12 @@ void run_test(const char* name, const char* output, const char* error, const std
     });
     if (seenIt == false) {
         throw "Test wasn't run";
+    }
+    if (result && error) {
+        throw "Expected to fail but passed";
+    }
+    else if (!result && !error) {
+        throw "Expected to pass but failed";
     }
 }
 

@@ -20,5 +20,9 @@
 #include "attest/assert.h"
 
 ATTEST("Simple maths", [](){
-    Attest::Assert::equals(2 + 2, 4);
+    Attest::Assert::equals(4, 2 + 2);
+});
+
+ATTEST("Complex maths", [](){
+    Attest::Assert::equals(4, 2 * 2);
 });

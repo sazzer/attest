@@ -40,7 +40,7 @@ namespace Attest {
              * Configure the options that are supported by this reporter
              * @param options The options object to configure
              */
-            virtual void configureOptions(boost::program_options::options_description& options) {
+            virtual void configureOptions(boost::program_options::options_description& options) const {
             }
 
             /**

@@ -93,9 +93,11 @@ namespace Attest {
 
     /**
      * Actually run all of the registered tests, and call the provided callback function with the results of each test run
+     * @return True if the tests all passed. False if any failed
      */
-    void run_tests(std::function<void(const TestResult&)> callback) {
+    bool run_tests(std::function<void(const TestResult&)> callback) {
         size_t index = 0;
+        bool allPassed = true;
         for (auto iter = tests.begin(); iter != tests.end(); ++iter, ++index) {
             TestResult testResult = {
                 (*iter)->name(),
@@ -127,6 +129,10 @@ namespace Attest {
             testResult.output = buffer.str();
 
             callback(testResult);
+            if (!testResult.error.empty()) {
+                allPassed = false;
+            }
         }
+        return allPassed;
     }
 }

@@ -44,10 +44,10 @@ int main(const int argc, const char** argv) {
     else {
         reporter->processOptions(vm);
         reporter->start();
-        Attest::run_tests([&](const Attest::TestResult& r){
+        bool success = Attest::run_tests([&](const Attest::TestResult& r){
             reporter->record(r);
         });
         reporter->end();
-        return 0;
+        return success ? 0 : 1;
     }
 }
