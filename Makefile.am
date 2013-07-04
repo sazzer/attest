@@ -8,6 +8,9 @@ libattest_la_LIBADD = ${BOOST_PROGRAM_OPTIONS_LIBS}
 
 pkginclude_HEADERS = include/attest/attest.h include/attest/assert.h
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = attest.pc
+
 check_PROGRAMS = test_register
 test_register_SOURCES = test/test_register.cpp
 test_register_LDADD = libattest.la
