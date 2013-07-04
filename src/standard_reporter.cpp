@@ -74,13 +74,16 @@ namespace Attest {
                 output << iter->name << ": ";
                 if (iter->success()) {
                     ++passed;
-                    output << "SUCCESS";
+                    output << "SUCCESS" << std::endl;
                 }
                 else {
                     ++failed;
-                    output << "FAILURE";
+                    output << "FAILURE" << std::endl;
+                    output << ">>> " << iter->error << std::endl;
                 }
-                output << std::endl;
+                if (!iter->output.empty()) {
+                    output << "=== " << iter->output << std::endl;
+                }
             }
             output << "Tests: " << tests << ", Passed: " << passed << ", Failed: " << failed << std::endl;
         }

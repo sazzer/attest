@@ -51,6 +51,34 @@ int main(void) {
         reporter.start();
         reporter.end();
     });
+
+    run("test_success_no_output", [](){
+        Attest::Reporters::StandardReporter reporter;
+        reporter.start();
+        reporter.record({"Simple Test", 0, "", ""});
+        reporter.end();
+    });
+
+    run("test_success_output", [](){
+        Attest::Reporters::StandardReporter reporter;
+        reporter.start();
+        reporter.record({"Simple Test", 0, "Here is some output\nAnd some more", ""});
+        reporter.end();
+    });
+
+    run("test_failure_no_output", [](){
+        Attest::Reporters::StandardReporter reporter;
+        reporter.start();
+        reporter.record({"Simple Test", 0, "", "I failed"});
+        reporter.end();
+    });
+
+    run("test_failure_no_output", [](){
+        Attest::Reporters::StandardReporter reporter;
+        reporter.start();
+        reporter.record({"Simple Test", 0, "Two lines\nof output", "I failed"});
+        reporter.end();
+    });
     return test_result ? 0 : 1;
 }
 
