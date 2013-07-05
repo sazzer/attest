@@ -7,6 +7,7 @@ libattest_la_CPPFLAGS = ${BOOST_CPPFLAGS}
 libattest_la_LIBADD = ${BOOST_PROGRAM_OPTIONS_LIBS}
 
 pkginclude_HEADERS = include/attest/attest.h include/attest/assert.h
+EXTRA_DIST = include test
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = attest.pc

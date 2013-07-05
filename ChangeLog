@@ -1,0 +1,5 @@
+2013-07-05    Attest 0.1
+
+    First usable version of Attest Unit Testing Framework.
+	Includes support for building test programs that link to the Attest
+	libraries, and running these programs.
