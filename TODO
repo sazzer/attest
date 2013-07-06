@@ -1,4 +1,3 @@
-* Make the StandardReporter actually output to a file if so configured
 * Provide a mechanism for listing reporters
 * Provide a mechanism for selecting an alternative reporter to use
 * Provide additional reporters

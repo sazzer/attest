@@ -23,6 +23,7 @@
 #include "attest/reporter.h"
 #include <string>
 #include <list>
+#include <fstream>
 
 namespace Attest {
     namespace Reporters {
@@ -40,13 +41,13 @@ namespace Attest {
                  * Configure the options that are supported by this reporter
                  * @param options The options object to configure
                  */
-                virtual void configureOptions(boost::program_options::options_description& options);
+                virtual void configureOptions(boost::program_options::options_description& options) const override;
 
                 /**
                  * Configure the reporter based on the variables provided by the supplied variables map
                  * @param options The options to use to configure the reporter
                  */
-                virtual void processOptions(const boost::program_options::variables_map& options);
+                virtual void processOptions(const boost::program_options::variables_map& options) override;
 
                 /**
                  * Determine the current output file that is stored
@@ -56,21 +57,30 @@ namespace Attest {
                 /**
                  * Start recording of test output.
                  */
-                virtual void start();
+                virtual void start() override;
                 /**
                  * Record a single test output.
                  * @param result The result to record
                  */
-                virtual void record(const ::Attest::TestResult& result);
+                virtual void record(const ::Attest::TestResult& result) override;
                 /**
                  * Finish recording all of the tests
                  */
-                virtual void end();
+                virtual void end() override;
+            protected:
+                /**
+                 * Return a reference to the output stream to write to.
+                 * This is either this->outputStream_ if that is valid, or std::cout otherwise
+                 * @return the output stream.
+                 */
+                std::ostream& outputStream();
             private:
                 /** The filename to write to. Might not be specified */
                 std::string outputFile_;
                 /** The list of results that we've seen */
                 std::list<Attest::TestResult> results_;
+                /** The output stream to use */
+                std::ofstream outputStream_;
         };
     }
 }
