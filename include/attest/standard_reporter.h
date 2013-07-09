@@ -5,7 +5,7 @@
  *
  *    Description:  Standard reporter that simply outputs everything to standard output or a file
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  24/06/13 21:21:33
  *       Revision:  none
  *       Compiler:  gcc

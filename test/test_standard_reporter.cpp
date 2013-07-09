@@ -5,7 +5,7 @@
  *
  *    Description:  Unit tests for the standard reporter
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  24/06/13 21:50:07
  *       Revision:  none
  *       Compiler:  gcc

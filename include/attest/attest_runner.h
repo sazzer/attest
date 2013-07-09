@@ -5,7 +5,7 @@
  *
  *    Description:  Functions used in the running of tests, but that aren't part of the public API
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  16/06/13 18:56:11
  *       Revision:  none
  *       Compiler:  gcc

@@ -5,7 +5,7 @@
  *
  *    Description:  Test harness for testing the unit tests
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  16/06/13 19:14:13
  *       Revision:  none
  *       Compiler:  gcc

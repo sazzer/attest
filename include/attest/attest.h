@@ -5,7 +5,7 @@
  *
  *    Description:  Main attest header file
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  16/06/13 18:33:53
  *       Revision:  none
  *       Compiler:  gcc

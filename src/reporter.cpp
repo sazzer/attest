@@ -5,7 +5,7 @@
  *
  *    Description:  Implementation of the core components of the reporters
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  24/06/13 19:31:26
  *       Revision:  none
  *       Compiler:  gcc

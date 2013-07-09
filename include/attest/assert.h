@@ -5,7 +5,7 @@
  *
  *    Description:  Assertions for use in unit tests
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  18/06/13 20:11:04
  *       Revision:  none
  *       Compiler:  gcc

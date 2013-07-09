@@ -5,7 +5,7 @@
  *
  *    Description:  Tests for the registration of unit tests
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  16/06/13 19:05:18
  *       Revision:  none
  *       Compiler:  gcc

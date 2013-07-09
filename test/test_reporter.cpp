@@ -5,7 +5,7 @@
  *
  *    Description:  Unit tests for the core Reporter class
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  24/06/13 12:42:07
  *       Revision:  none
  *       Compiler:  gcc

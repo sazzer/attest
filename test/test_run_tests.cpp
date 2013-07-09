@@ -5,7 +5,7 @@
  *
  *    Description:  Test that running of tests works correctly
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  17/06/13 20:23:42
  *       Revision:  none
  *       Compiler:  gcc

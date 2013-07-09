@@ -5,7 +5,7 @@
  *
  *    Description:  Implementation of the standard reporter
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  24/06/13 21:26:16
  *       Revision:  none
  *       Compiler:  gcc

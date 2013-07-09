@@ -5,7 +5,7 @@
  *
  *    Description:  The main test registration and execution routines
  *
- *        Version:  1.0
+ *        Version:  0.1
  *        Created:  16/06/13 18:46:24
  *       Revision:  none
  *       Compiler:  gcc
