@@ -1,5 +1,5 @@
-AC_REVISION([0.1])
-AC_INIT([attest], [0.1], [graham@grahamcox.co.uk])
+AC_REVISION([0.2])
+AC_INIT([attest], [0.2], [graham@grahamcox.co.uk])
 AC_PREREQ([2.59])
 AM_INIT_AUTOMAKE([1.10 no-define foreign])
 
