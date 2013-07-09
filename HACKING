@@ -1,0 +1,8 @@
+In order to do any development on attest, you will first need to set up the autoconf structure. This can be done simply by executing
+
+    $ autoreconf -i
+
+from the top of the source tree. Once that is done, you can then execute the standard ./configure; make; make check commands to do builds and run the tests.
+
+If the configure.ac or Makefile.am files are changed you may need to run autoreconf again to pick up these changes.
+
