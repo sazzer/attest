@@ -17,6 +17,8 @@ In order to build Attest, you will need a C++11 Compiler - only g++ has been tes
 
 Building/Installation
 ---------------------
+The latest version of attest can be downloaded from: https://github.com/sazzer/attest/raw/distributions/attest-0.1.tar.gz
+
 Compilation from a tar.gz archive follows the typical autoconf process of 
 * ./configure
 * make clean all check
